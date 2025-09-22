@@ -13,7 +13,7 @@ import threading
 # 🔧 SETTINGS
 # -------------------
 POST_HOUR = 14
-POST_MINUTE = 17
+POST_MINUTE = 36
 FILTER_IMPACTS = ["High Impact Expected", "Medium Impact Expected"]
 FILTER_TYPES = []
 FILTER_CURRENCIES = []
@@ -63,7 +63,7 @@ threading.Thread(target=run_flask).start()
 # -------------------
 def get_forex_news():
     try:
-        url = "https://www.forexfactory.com/calendar"
+        url = url = "https://example.com"
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
