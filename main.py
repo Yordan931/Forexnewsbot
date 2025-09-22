@@ -1,3 +1,4 @@
+import os
 import discord
 import requests
 from bs4 import BeautifulSoup
@@ -5,7 +6,6 @@ from googletrans import Translator
 import asyncio
 import pytz
 from datetime import datetime, timedelta
-import os
 from flask import Flask
 import threading
 
@@ -14,9 +14,6 @@ import threading
 # -------------------
 POST_HOUR = 16
 POST_MINUTE = 25
-FILTER_IMPACTS = ["High Impact Expected", "Medium Impact Expected"]
-FILTER_TYPES = []
-FILTER_CURRENCIES = []
 TIMEZONE = "Europe/Sofia"
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -54,7 +51,8 @@ def home():
     return "Bot is running!"
 
 def run_flask():
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
 threading.Thread(target=run_flask).start()
 
@@ -63,7 +61,7 @@ threading.Thread(target=run_flask).start()
 # -------------------
 def get_forex_news():
     try:
-        url = "https://example.com"
+        url = "https://example.com"  # сложи реалния URL
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
@@ -93,8 +91,8 @@ async def send_news():
     if not channel:
         print(f"❌ Channel with ID {CHANNEL_ID} not found.")
         return
-    tz = pytz.timezone(TIMEZONE)
 
+    tz = pytz.timezone(TIMEZONE)
     while not client.is_closed():
         now = datetime.now(tz)
         target_time = tz.localize(datetime(now.year, now.month, now.day,
@@ -110,7 +108,12 @@ async def send_news():
 @client.event
 async def on_ready():
     print(f"✅ Bot started as {client.user}")
-    client.loop.create_task(send_news())
+    asyncio.create_task(send_news())
 
-if __name__ == "__main__":
-    client.run(TOKEN)
+# -------------------
+# Запуск на Render
+# -------------------
+async def main():
+    await client.start(TOKEN)
+
+asyncio.run(main())
