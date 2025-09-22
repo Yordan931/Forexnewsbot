@@ -13,7 +13,7 @@ import threading
 # 🔧 SETTINGS
 # -------------------
 POST_HOUR = 14
-POST_MINUTE = 36
+POST_MINUTE = 45
 FILTER_IMPACTS = ["High Impact Expected", "Medium Impact Expected"]
 FILTER_TYPES = []
 FILTER_CURRENCIES = []
