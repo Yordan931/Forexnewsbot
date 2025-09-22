@@ -69,7 +69,7 @@ def get_forex_news():
         rows = soup.find_all("tr", class_="calendar__row")
         events = []
 
-          for row in rows:
+        for row in rows:
             event_cell = row.find("td", class_="calendar__event")
             if event_cell and event_cell.text.strip():
                 event_name = event_cell.text.strip()
@@ -87,6 +87,7 @@ def get_forex_news():
     except Exception as e:
         print(f"❌ Error fetching news: {e}")
         return "❌ An error occurred."
+
 
 async def send_news():
     await client.wait_until_ready()
