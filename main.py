@@ -61,7 +61,7 @@ threading.Thread(target=run_flask).start()
 # -------------------
 def get_forex_news():
     try:
-        url = "https://www.forexfactory.com
+        url = "https://www.forexfactory.com"
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
