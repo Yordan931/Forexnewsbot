@@ -13,7 +13,7 @@ import threading
 # 🔧 SETTINGS
 # -------------------
 POST_HOUR = 22
-POST_MINUTE = 33
+POST_MINUTE = 40
 TIMEZONE = "Europe/Sofia"
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -61,7 +61,7 @@ threading.Thread(target=run_flask).start()
 # -------------------
 def get_forex_news():
     try:
-        url = "https://www.forexfactory.com"
+        url =  "https://www.investing.com/economic-calendar/"
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
