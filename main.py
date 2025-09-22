@@ -12,8 +12,8 @@ import threading
 # -------------------
 # 🔧 SETTINGS
 # -------------------
-POST_HOUR = 17
-POST_MINUTE = 56
+POST_HOUR = 22
+POST_MINUTE = 33
 TIMEZONE = "Europe/Sofia"
 
 TOKEN = os.getenv("DISCORD_TOKEN")
