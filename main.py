@@ -13,7 +13,7 @@ import threading
 # 🔧 SETTINGS
 # -------------------
 POST_HOUR = 17
-POST_MINUTE = 35
+POST_MINUTE = 56
 TIMEZONE = "Europe/Sofia"
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -61,7 +61,7 @@ threading.Thread(target=run_flask).start()
 # -------------------
 def get_forex_news():
     try:
-        url = "https://www.forexfactory.com/calendar.php"
+        url = "https://www.forexfactory.com
         headers = {'User-Agent': 'Mozilla/5.0'}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
@@ -69,7 +69,7 @@ def get_forex_news():
         rows = soup.find_all("tr", class_="calendar__row")
         events = []
 
-        for row in rows:
+          for row in rows:
             event_cell = row.find("td", class_="calendar__event")
             if event_cell and event_cell.text.strip():
                 event_name = event_cell.text.strip()
@@ -79,7 +79,10 @@ def get_forex_news():
                     event_bg = event_name
                 events.append(f"{event_name} ({event_bg})")
 
-        return "\n".join(events) if events else "❌ No news found."
+        if events:
+            return "\n".join(events)
+        else:
+            return "📢 Днес няма важни новини."
 
     except Exception as e:
         print(f"❌ Error fetching news: {e}")
